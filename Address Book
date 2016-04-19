@@ -1,0 +1,551 @@
+package com.address.book;
+
+import java.awt.Component;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class AddressBook extends javax.swing.JFrame {
+
+    // A reference to the DatabaseManager class
+    private DatabaseManager databaseManager;
+    // The arrayList should be global so that it can be accessed behind
+    // the navigation buttons.
+    private ArrayList<Person> personList;
+    // The array position (change by the navigation buttons)
+    private int arrayPosition;
+
+    public AddressBook() {
+        initComponents();
+        setSize(getPreferredSize());
+
+        //Initialise the database manager
+
+        databaseManager = new DatabaseManager();
+    }
+
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">                          
+    private void initComponents() {
+
+        jLabel1 = new javax.swing.JLabel();
+        pnlLastName = new javax.swing.JPanel();
+        lblSchLastName = new javax.swing.JLabel();
+        lblLastName = new javax.swing.JLabel();
+        txtSearchLastName = new javax.swing.JTextField();
+        btnSearchLastName = new javax.swing.JButton();
+        pnlAddressBookEntries = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        lblID = new javax.swing.JLabel();
+        lblFirstName = new javax.swing.JLabel();
+        lblABLastName = new javax.swing.JLabel();
+        lblEmail = new javax.swing.JLabel();
+        lblPhoneNumber = new javax.swing.JLabel();
+        txtLastName = new javax.swing.JTextField();
+        txtFirstName = new javax.swing.JTextField();
+        txtID = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtPhoneNumber = new javax.swing.JTextField();
+        btnSelectAll = new javax.swing.JButton();
+        btnInsert = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
+        btnClearAll = new javax.swing.JButton();
+        pnlNavigation = new javax.swing.JPanel();
+        lblNavigation = new javax.swing.JLabel();
+        btnFirst = new javax.swing.JButton();
+        btnPrevious = new javax.swing.JButton();
+        btnNext = new javax.swing.JButton();
+        btnLast = new javax.swing.JButton();
+        lblRecord = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Vrinda", 0, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Address Book");
+
+        pnlLastName.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblSchLastName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblSchLastName.setText("Search for Last Name");
+
+        lblLastName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblLastName.setText("Last Name:");
+
+        txtSearchLastName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+
+        btnSearchLastName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        btnSearchLastName.setText("Search");
+        btnSearchLastName.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSearchLastNameActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlLastNameLayout = new javax.swing.GroupLayout(pnlLastName);
+        pnlLastName.setLayout(pnlLastNameLayout);
+        pnlLastNameLayout.setHorizontalGroup(
+            pnlLastNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLastNameLayout.createSequentialGroup()
+                .addComponent(lblSchLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlLastNameLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(lblLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(txtSearchLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSearchLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99))
+        );
+        pnlLastNameLayout.setVerticalGroup(
+            pnlLastNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlLastNameLayout.createSequentialGroup()
+                .addComponent(lblSchLastName)
+                .addGap(25, 25, 25)
+                .addGroup(pnlLastNameLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLastName)
+                    .addComponent(txtSearchLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSearchLastName))
+                .addGap(0, 30, Short.MAX_VALUE))
+        );
+
+        pnlAddressBookEntries.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setText("Address Book Entries");
+
+        lblID.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblID.setText("ID:");
+
+        lblFirstName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblFirstName.setText("First Name:");
+
+        lblABLastName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblABLastName.setText("Last Name:");
+
+        lblEmail.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblEmail.setText("Email:");
+
+        lblPhoneNumber.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblPhoneNumber.setText("Phone Number:");
+
+        txtLastName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+
+        txtFirstName.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+
+        txtID.setEditable(false);
+        txtID.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+
+        txtEmail.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+
+        txtPhoneNumber.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+
+        btnSelectAll.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        btnSelectAll.setText("Select All");
+        btnSelectAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSelectAllActionPerformed(evt);
+            }
+        });
+
+        btnInsert.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        btnInsert.setText("Insert");
+        btnInsert.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInsertActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+
+        btnUpdate.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        btnClearAll.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        btnClearAll.setText("Clear All");
+        btnClearAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnClearAllActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout pnlAddressBookEntriesLayout = new javax.swing.GroupLayout(pnlAddressBookEntries);
+        pnlAddressBookEntries.setLayout(pnlAddressBookEntriesLayout);
+        pnlAddressBookEntriesLayout.setHorizontalGroup(
+            pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblABLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAddressBookEntriesLayout.createSequentialGroup()
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                            .addGap(55, 55, 55)
+                            .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAddressBookEntriesLayout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAddressBookEntriesLayout.createSequentialGroup()
+                        .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnInsert, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSelectAll, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(91, 91, 91))
+                    .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                        .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(btnClearAll, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap())))
+        );
+        pnlAddressBookEntriesLayout.setVerticalGroup(
+            pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(44, 44, 44)
+                .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(lblID)
+                        .addGap(18, 18, 18)
+                        .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(lblFirstName)
+                                .addGap(24, 24, 24)
+                                .addComponent(lblABLastName)
+                                .addGap(25, 25, 25)
+                                .addComponent(lblEmail)
+                                .addGap(18, 18, 18)
+                                .addComponent(lblPhoneNumber)
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlAddressBookEntriesLayout.createSequentialGroup()
+                                .addComponent(txtFirstName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                            .addComponent(txtPhoneNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(btnClearAll)))
+                                    .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                                        .addGap(16, 16, 16)
+                                        .addComponent(btnUpdate)))
+                                .addContainerGap(33, Short.MAX_VALUE))))
+                    .addGroup(pnlAddressBookEntriesLayout.createSequentialGroup()
+                        .addGroup(pnlAddressBookEntriesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnSelectAll))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnInsert)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnDelete)
+                        .addGap(0, 0, Short.MAX_VALUE))))
+        );
+
+        pnlNavigation.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        lblNavigation.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblNavigation.setText("Navigation");
+
+        btnFirst.setText("<<");
+        btnFirst.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFirstActionPerformed(evt);
+            }
+        });
+
+        btnPrevious.setText("<");
+        btnPrevious.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPreviousActionPerformed(evt);
+            }
+        });
+
+        btnNext.setText(">");
+        btnNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNextActionPerformed(evt);
+            }
+        });
+
+        btnLast.setText(">>");
+        btnLast.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLastActionPerformed(evt);
+            }
+        });
+
+        lblRecord.setFont(new java.awt.Font("Vrinda", 0, 12)); // NOI18N
+        lblRecord.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+
+        javax.swing.GroupLayout pnlNavigationLayout = new javax.swing.GroupLayout(pnlNavigation);
+        pnlNavigation.setLayout(pnlNavigationLayout);
+        pnlNavigationLayout.setHorizontalGroup(
+            pnlNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavigationLayout.createSequentialGroup()
+                .addComponent(lblNavigation, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(pnlNavigationLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addComponent(btnFirst, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPrevious, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
+                .addComponent(lblRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addComponent(btnNext, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnLast, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113))
+        );
+        pnlNavigationLayout.setVerticalGroup(
+            pnlNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlNavigationLayout.createSequentialGroup()
+                .addComponent(lblNavigation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlNavigationLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLast, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(btnPrevious, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnFirst, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnNext, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlNavigationLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblRecord, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
+        );
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(pnlLastName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlAddressBookEntries, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(pnlNavigation, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(242, 242, 242)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(55, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(pnlLastName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(pnlAddressBookEntries, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(pnlNavigation, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+
+        pack();
+    }// </editor-fold>                        
+
+    private void btnSelectAllActionPerformed(java.awt.event.ActionEvent evt) {                                             
+        personList = databaseManager.getAllEntries();
+
+        populateAllTextFields();
+
+    }                                            
+
+    private void populateAllTextFields() {
+        // Only call .get on the arraylist if it is not empty.
+        if (!personList.isEmpty()) {
+
+            // Get the first Person from the arraylist and p will refer to it
+            Person p = (Person) personList.get(arrayPosition);
+
+            // Get each field/ member/ attibute/ instance variable from the 
+            // Person object and put them into the corresponding textField
+            txtEmail.setText(p.getEmail());
+            txtFirstName.setText(p.getFirstName());
+            txtID.setText("" + p.getId());
+            txtLastName.setText(p.getLastName());
+            txtPhoneNumber.setText(p.getPhoneNumber());
+
+            // Display the record number in the label
+            lblRecord.setText(arrayPosition + 1 + " of "
+                    + personList.size());
+        }
+    }
+
+    private void btnFirstActionPerformed(java.awt.event.ActionEvent evt) {                                         
+        arrayPosition = 0;
+        populateAllTextFields();
+    }                                        
+
+    private void btnPreviousActionPerformed(java.awt.event.ActionEvent evt) {                                            
+
+        arrayPosition--;
+
+        if (arrayPosition < 0) {
+            arrayPosition = personList.size() - 1;
+        }
+        populateAllTextFields();
+    }                                           
+
+    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        arrayPosition++;
+
+        if (arrayPosition >= personList.size()) {
+            arrayPosition = 0;
+        }
+
+        populateAllTextFields();
+    }                                       
+
+    private void btnLastActionPerformed(java.awt.event.ActionEvent evt) {                                        
+        arrayPosition = personList.size() - 1;
+        populateAllTextFields();
+    }                                       
+
+    private void btnSearchLastNameActionPerformed(java.awt.event.ActionEvent evt) {                                                  
+        personList = databaseManager.getAllEntriesByLastName(txtSearchLastName.getText());
+
+        if (personList.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No records found.");
+            btnClearAll.doClick();
+        } else {
+            populateAllTextFields();
+        }
+
+    }                                                 
+
+    private void btnClearAllActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        for (Component c : this.getContentPane().getComponents()) {
+
+            if (c instanceof JPanel) {
+                for (Component c1 : ((JPanel) c).getComponents()) {
+
+                    if (c1 instanceof JTextField) {
+                        ((JTextField) c1).setText("");
+                    }
+                }
+            }
+        }
+        // Set the label's text to '0 of 0'
+        lblRecord.setText("0 of 0");
+    }                                           
+
+    private void btnInsertActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        databaseManager.insertPerson(txtFirstName.getText(), txtLastName.getText(),
+                txtEmail.getText(), txtPhoneNumber.getText());
+
+        btnSelectAll.doClick();
+        btnLast.doClick();
+
+    }                                         
+
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        databaseManager.deletePerson(Integer.parseInt(txtID.getText()));
+
+        btnSelectAll.doClick();
+
+    }                                         
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        databaseManager.updateEntry(txtFirstName.getText(), txtLastName.getText(), txtEmail.getText(),
+                txtPhoneNumber.getText(), Integer.parseInt(txtID.getText()));
+    }                                         
+
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(AddressBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(AddressBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(AddressBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(AddressBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
+
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new AddressBook().setVisible(true);
+            }
+        });
+    }
+    // Variables declaration - do not modify                     
+    private javax.swing.JButton btnClearAll;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnFirst;
+    private javax.swing.JButton btnInsert;
+    private javax.swing.JButton btnLast;
+    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnPrevious;
+    private javax.swing.JButton btnSearchLastName;
+    private javax.swing.JButton btnSelectAll;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel lblABLastName;
+    private javax.swing.JLabel lblEmail;
+    private javax.swing.JLabel lblFirstName;
+    private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblLastName;
+    private javax.swing.JLabel lblNavigation;
+    private javax.swing.JLabel lblPhoneNumber;
+    private javax.swing.JLabel lblRecord;
+    private javax.swing.JLabel lblSchLastName;
+    private javax.swing.JPanel pnlAddressBookEntries;
+    private javax.swing.JPanel pnlLastName;
+    private javax.swing.JPanel pnlNavigation;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtFirstName;
+    private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtLastName;
+    private javax.swing.JTextField txtPhoneNumber;
+    private javax.swing.JTextField txtSearchLastName;
+    // End of variables declaration                   
+}
