@@ -1,0 +1,188 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.address.book;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
+/**
+ *
+ * @author dsd12
+ */
+public class DatabaseManager {
+
+    // A global connection object, it will be used in all the methods below.
+    private Connection conn;
+
+    public DatabaseManager() {
+        try {
+            // Set up the connection to the database
+            conn = DriverManager.getConnection(
+                    "jdbc:odbc:Driver={SQL Server};"
+                    + "server=SD-20\\SQLEXPRESS;"
+                    + "Database=AddressBook");
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null,
+                    "Unable to connect to the database");
+            ex.printStackTrace();
+        }
+    }
+
+    public ArrayList<Person> getAllEntries() {
+        // Create an instance of an ArrayList, it will only contain Person
+        // objects.
+        ArrayList<Person> personList = new ArrayList<>();
+
+        try {
+            PreparedStatement selectStmt = conn.prepareStatement(
+                    "SELECT * from Entries");
+            // Execute the select statement, a resultSet wil be returned
+            ResultSet rs = selectStmt.executeQuery();
+
+            // Loop through the resultset
+            while (rs.next()) {
+                // Get the data from each cell
+                int id = rs.getInt(1);  // getInt because id is an int in the DB
+                String firstName = rs.getString(2);
+                String lastName = rs.getString(3);
+                String email = rs.getString(4);
+                String phoneNumber = rs.getString(5);
+
+                // Create a Person object from that data
+                Person p = new Person(id, firstName, lastName,
+                        email, phoneNumber);
+
+                // calls the toString() on the person obj
+                System.out.println(p);
+
+                // Add that Person object to the ArrayList
+                personList.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+
+        return personList;
+    }
+
+    public ArrayList<Person> getAllEntriesByLastName(String name) {
+
+        ArrayList<Person> personList = new ArrayList<>();
+
+        try {
+            PreparedStatement selectStmt = conn.prepareStatement(
+                    "SELECT * from Entries WHERE lastName = ? ");
+
+            selectStmt.setString(1, name);
+
+            ResultSet rs = selectStmt.executeQuery();
+
+            while (rs.next()) {
+
+                int id = rs.getInt(1);
+                String firstName = rs.getString(2);
+                String lastName = rs.getString(3);
+                String email = rs.getString(4);
+                String phoneNumber = rs.getString(5);
+
+                Person p = new Person(id, firstName, lastName,
+                        email, phoneNumber);
+
+                System.out.println(p);
+
+                personList.add(p);
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).
+                    log(Level.SEVERE, null, ex);
+        }
+
+        return personList;
+    }
+
+    public void insertPerson(String firstName, String lastName, String email, String phoneNumber) {
+        try {
+            PreparedStatement insertStmt = conn.prepareStatement("INSERT INTO Entries Values"
+                    + "(?, ?, ?, ?)");
+
+            insertStmt.setString(1, firstName);
+            insertStmt.setString(2, lastName);
+            insertStmt.setString(3, email);
+            insertStmt.setString(4, phoneNumber);
+
+            //Execute update will return an int representing the number of
+            //rows affected. 1 = success, 0 = problem
+            int numRows = insertStmt.executeUpdate();
+
+            if (numRows == 1) {
+                JOptionPane.showMessageDialog(null, "Insert successful");
+            } else {
+                JOptionPane.showMessageDialog(null, "Insert failed");
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
+
+    public void deletePerson(int ID) {
+        try {
+            PreparedStatement deleteStmt = conn.prepareStatement("DELETE from Entries WHERE ID = ?");
+
+            deleteStmt.setInt(1, ID);
+
+            // executeUpdate will return an int representing the number
+            // of row affected. 1 = success, 0 = problem
+            int numRows = deleteStmt.executeUpdate();
+
+            if (numRows == 1) {
+                JOptionPane.showMessageDialog(null, "Update successful");
+            } else {
+                JOptionPane.showMessageDialog(null, "Unable to update");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void updateEntry(String firstName, String lastName,
+            String email, String phoneNumber, int id) {
+        try {
+            PreparedStatement updateStmt = conn.prepareStatement(
+                    "UPDATE Entries Set firstName=?, lastName=?, "
+                    + "email=?, phoneNumber=? WHERE id=?");
+
+            updateStmt.setString(1, firstName);
+            updateStmt.setString(2, lastName);
+            updateStmt.setString(3, email);
+            updateStmt.setString(4, phoneNumber);
+            updateStmt.setInt(5, id);
+
+            // executeUpdate will return an int representing the number
+            // of row affected. 1 = success, 0 = problem
+            int numRows = updateStmt.executeUpdate();
+
+            if (numRows == 1) {
+                JOptionPane.showMessageDialog(null, "Update successful");
+            } else {
+                JOptionPane.showMessageDialog(null, "Unable to update");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+}
